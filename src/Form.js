@@ -13,7 +13,7 @@ export function Form() {
     const onSubmit = async (data) => {
 
         try {
-            const response = await fetch('http://localhost:8080/api/cadastro',
+            const response = await fetch('http://localhost:8080/api/v1/usuario',
                 {
                     method: 'POST',
                     headers: {
@@ -76,17 +76,22 @@ export function Form() {
                     className="w-full border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                 /><br />
                 {errors.dataNascimento && <p style={{ color: "red" }}>{errors.dataNascimento.message}</p>}
+                <label >CPF </label>
+                <input type='cpf'
+                    {...register("cpf", { required: "O CPF é obrigatório" })}
+                    className="w-full border rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                /><br />
+                
+                {errors.cpf && <p style={{ color: "red" }}>{errors.cpf.message}</p>}
                 <div className='flex justify-center'>
                     <button className="w-1/2 mt-2 p-3 text-white rounded-lg bg-sky-500 hover:bg-sky-700" type='submit'>Enviar</button>
                 </div>
             </form>
-
             {mensagem && (
                 <div className={`p-3 rounded-lg text-center ${mensagem.type === 'sucesso' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
                     }`}>{mensagem.text}
                 </div>
             )}
-
         </div>
     )
 }
